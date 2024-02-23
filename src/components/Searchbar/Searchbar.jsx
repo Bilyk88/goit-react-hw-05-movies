@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import {
   Form,
-  Header,
   Input,
   SearchButton,
   SearchButtonLabel,
@@ -20,21 +19,18 @@ export const Searchbar = ({ onSubmit }) => {
   };
 
   return (
-    <Header>
-      <Form onSubmit={handleSubmit}>
-        <SearchButton type="submit">
-          <SearchButtonLabel>Search</SearchButtonLabel>
-        </SearchButton>
-
-        <Input
-          type="text"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search images and photos"
-          value={value}
-          onChange={handleChange}
-        />
-      </Form>
-    </Header>
+    <Form onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        autoComplete="off"
+        autoFocus
+        placeholder="Search movie"
+        value={value}
+        onChange={handleChange}
+      />
+      <SearchButton type="submit">
+        <SearchButtonLabel>Search</SearchButtonLabel>
+      </SearchButton>
+    </Form>
   );
 };
