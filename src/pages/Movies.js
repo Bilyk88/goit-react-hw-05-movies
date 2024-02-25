@@ -1,5 +1,6 @@
 import { fetchMovies } from 'api';
 import { MoviesList } from 'components/ImageGallery/MoviesList';
+import { Loader } from 'components/Loader/Loader';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -7,7 +8,7 @@ import toast from 'react-hot-toast';
 export default function Movies() {
   const [movies, setMovies] = useState([]);
   const [value, setValue] = useState('');
-  const [, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState(false);
 
   useEffect(() => {
@@ -42,6 +43,7 @@ export default function Movies() {
        {movies.length > 0 && (
         <MoviesList movies={movies} />
       )}
+      {isLoading && <Loader />}
     </div>
   );
 }
