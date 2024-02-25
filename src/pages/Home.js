@@ -15,7 +15,6 @@ export default function Home() {
         setIsLoading(true);
         setError(false);
         const searchResult = await fetchTrendMovies();
-        console.log(searchResult);
         setTrendMovies(searchResult);
       } catch (error) {
         setError(true);

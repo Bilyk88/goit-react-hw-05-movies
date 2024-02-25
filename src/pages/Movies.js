@@ -1,5 +1,5 @@
 import { fetchMovies } from 'api';
-import { MoviesList } from 'components/ImageGallery/MoviesList';
+import { MoviesList } from 'components/MoviesList';
 import { Loader } from 'components/Loader/Loader';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { useEffect, useState } from 'react';

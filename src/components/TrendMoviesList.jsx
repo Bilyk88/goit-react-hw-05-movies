@@ -4,7 +4,7 @@ export const TrendMoviesList = ({ trendMovies }) => {
   return (
     <ul>
       {trendMovies.map(({ id, name, title }) => {
-        return <TrendMovie key={id} name={name} title={title} />;
+        return <TrendMovie key={id} name={name} title={title} id={id} />;
       })}
     </ul>
   );
