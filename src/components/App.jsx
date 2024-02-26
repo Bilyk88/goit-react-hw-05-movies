@@ -6,6 +6,7 @@ import { Suspense, lazy } from 'react';
 import { Toaster } from 'react-hot-toast';
 // import { Reviews } from './Reviews';
 import { Header, StyledLink } from './Header.styled';
+import { Loader } from './Loader/Loader';
 // import { Cast } from './Cast/Cast';
 
 const Home = lazy(() => import('../pages/Home'));
@@ -33,18 +34,20 @@ export const App = () => {
           </ul>
         </nav>
       </Header>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
-          <Route path="*" element={<Home />} />
-        </Routes>
-        <Toaster position="top-right" />
-      </Suspense>
+      <main>
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:movieId" element={<MovieDetails />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
+            <Route path="*" element={<Home />} />
+          </Routes>
+          <Toaster position="top-right" />
+        </Suspense>
+      </main>
     </div>
   );
 };
