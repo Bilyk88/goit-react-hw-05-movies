@@ -1,10 +1,11 @@
 import { fetchMovieCast } from 'api';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Loader } from './Loader/Loader';
+import { Loader } from '../Loader/Loader';
 import { useParams } from 'react-router-dom';
+import { CastCard } from './Cast.styled';
 
-export const Cast = () => {
+export default function Cast() {
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState(false);
@@ -31,19 +32,20 @@ export const Cast = () => {
   return (
     <div>
       <ul>
-        {cast.map(({ id, name, profile_path }) => {
+        {cast.map(({ id, name, character, profile_path }) => {
           return (
-            <li key={id}>
+            <CastCard key={id}>
               <img
                 src={`https://image.tmdb.org/t/p/original${profile_path}`}
                 alt="Profile"
               />
               <p>{name}</p>
-            </li>
+              <p>Character: {character}</p>
+            </CastCard>
           );
         })}
       </ul>
       {isLoading && <Loader />}
     </div>
   );
-};
+}

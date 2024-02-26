@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { Loader } from './Loader/Loader';
 import { useParams } from 'react-router-dom';
 
-export const Reviews = () => {
+export default function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState(false);
@@ -31,16 +31,18 @@ export const Reviews = () => {
   return (
     <div>
       <ul>
-        {reviews.map(({ id, author, content }) => {
-          return (
-            <li key={id}>
-              <h3>Author: {author}</h3>
-              <p>{content}</p>
-            </li>
-          );
-        })}
+        {reviews.length === 0
+          ? "We don't have any reviews for this movie."
+          : reviews.map(({ id, author, content }) => {
+              return (
+                <li key={id}>
+                  <h3>Author: {author}</h3>
+                  <p>{content}</p>
+                </li>
+              );
+            })}
       </ul>
       {isLoading && <Loader />}
     </div>
   );
-};
+}

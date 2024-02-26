@@ -1,27 +1,39 @@
-import { NavLink, Route, Routes } from 'react-router-dom';
-import Home from 'pages/Home';
-import Movies from 'pages/Movies';
-import MovieDetails from 'pages/MovieDetails';
+import { Route, Routes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+// import Home from 'pages/Home';
+// import Movies from 'pages/Movies';
+// import MovieDetails from 'pages/MovieDetails';
 import { Toaster } from 'react-hot-toast';
-import { Cast } from './Cast';
-import { Reviews } from './Reviews';
+// import { Reviews } from './Reviews';
+import { Header, StyledLink } from './Header.styled';
+// import { Cast } from './Cast/Cast';
+
+const Home = lazy(() => import('../pages/Home'));
+
+const Movies = lazy(() => import('../pages/Movies'));
+
+const MovieDetails = lazy(() => import('../pages/MovieDetails'));
+
+const Cast = lazy(() => import('./Cast/Cast'));
+
+const Reviews = lazy(() => import('./Reviews'));
 
 export const App = () => {
   return (
     <div>
-      <header>
+      <Header>
         <nav>
           <ul>
             <li>
-              <NavLink to="/">Home</NavLink>
+              <StyledLink to="/">Home</StyledLink>
             </li>
             <li>
-              <NavLink to="/movies">Movies</NavLink>
+              <StyledLink to="/movies">Movies</StyledLink>
             </li>
           </ul>
         </nav>
-      </header>
-      <main>
+      </Header>
+      <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
@@ -32,7 +44,7 @@ export const App = () => {
           <Route path="*" element={<Home />} />
         </Routes>
         <Toaster position="top-right" />
-      </main>
+      </Suspense>
     </div>
   );
 };

@@ -1,11 +1,14 @@
 import { fetchMovieById } from 'api';
 import { Loader } from 'components/Loader/Loader';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { MovieCard } from './MovieDetails.styled';
 
 export default function MovieDetails() {
+  const location = useLocation();
+  const backLinkRef = useRef(location);
+
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState(false);
@@ -32,6 +35,7 @@ export default function MovieDetails() {
 
   return (
     <div>
+      <Link to={backLinkRef.current.state?.from ?? '/' }>Go back</Link>
       {movie && (
         <MovieCard>
           <img
@@ -62,7 +66,9 @@ export default function MovieDetails() {
           <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 }
