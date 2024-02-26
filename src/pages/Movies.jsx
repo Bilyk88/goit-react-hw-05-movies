@@ -4,15 +4,19 @@ import { Loader } from 'components/Loader/Loader';
 import { Searchbar } from 'components/Searchbar/Searchbar';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
-  const [value, setValue] = useState('');
+  // const [value, setValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [, setError] = useState(false);
+  const [params, setParams] = useSearchParams();
+
+  const value = params.get('query');
 
   useEffect(() => {
-    if (value === '') {
+    if (!value) {
       return;
     }
     async function getMovies() {
@@ -32,7 +36,7 @@ export default function Movies() {
   }, [value]);
 
   const handleSubmit = newValue => {
-    setValue(newValue);
+    setParams({ query: newValue });
     setMovies([]);
   };
 
