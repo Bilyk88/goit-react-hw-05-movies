@@ -1,6 +1,6 @@
 import { fetchTrendMovies } from "api";
 import { Loader } from "components/Loader/Loader";
-import { TrendMoviesList } from "components/TrendMoviesList";
+import { MoviesList } from "components/MoviesList";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div>
       <h1>Trending today</h1>
-      <TrendMoviesList trendMovies={trendMovies} />
+      <MoviesList movies={trendMovies} />
       {isLoading && <Loader />}
     </div>);
 }

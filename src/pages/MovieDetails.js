@@ -3,6 +3,7 @@ import { Loader } from 'components/Loader/Loader';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, Outlet, useParams } from 'react-router-dom';
+import { MovieCard } from './MovieDetails.styled';
 
 export default function MovieDetails() {
   const [movie, setMovie] = useState(null);
@@ -31,17 +32,37 @@ export default function MovieDetails() {
 
   return (
     <div>
-      {movie && <h1>{movie.title}</h1>}
+      {movie && (
+        <MovieCard>
+          <img
+            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            alt="Movie poster"
+          />
+          <div>
+            <h1>{movie.title}</h1>
+            <h2>Overview</h2>
+            <p>{movie.overview}</p>
+            <ul>
+              <h2>Genres</h2>
+              {movie.genres.map(({ id, name }) => {
+                return <li key={id}>{name}</li>;
+              })}
+            </ul>
+          </div>
+        </MovieCard>
+      )}
       {isLoading && <Loader />}
       <ul>
+        <h3>Additional information</h3>
+
         <li>
-          <Link to='cast'>Cast</Link>
+          <Link to="cast">Cast</Link>
         </li>
         <li>
-          <Link to='reviews'>Reviews</Link>
+          <Link to="reviews">Reviews</Link>
         </li>
-    </ul>
-      <Outlet/>
+      </ul>
+      <Outlet />
     </div>
   );
 }
