@@ -21,7 +21,6 @@ export default function MovieDetails() {
         setIsLoading(true);
         setError(false);
         const searchResult = await fetchMovieById(params.movieId);
-        console.log(searchResult);
         setMovie(searchResult);
       } catch (error) {
         setError(true);
@@ -35,7 +34,7 @@ export default function MovieDetails() {
 
   return (
     <div>
-      <Link to={backLinkRef.current.state?.from ?? '/' }>Go back</Link>
+      <Link to={backLinkRef.current.state?.from ?? '/'}>Go back</Link>
       {movie && (
         <MovieCard>
           <img

@@ -20,7 +20,6 @@ export default function Movies() {
         setIsLoading(true);
         setError(false);
         const searchResult = await fetchMovies({ value });
-        console.log(searchResult);
         setMovies(searchResult);
       } catch (error) {
         setError(true);
@@ -40,9 +39,7 @@ export default function Movies() {
   return (
     <div>
       <Searchbar onSubmit={handleSubmit} />
-       {movies.length > 0 && (
-        <MoviesList movies={movies} />
-      )}
+      {movies.length > 0 && <MoviesList movies={movies} />}
       {isLoading && <Loader />}
     </div>
   );
